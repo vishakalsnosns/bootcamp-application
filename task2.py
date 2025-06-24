@@ -2,14 +2,14 @@
 Plays Higher or Lower with the user for integers between 1 and 100.
 
 Explanation:
-- the main loop first gets a validated guess.
+- the main loop, GuessingGame(), first gets a validated guess using ValidateInput().
 - Then sees if its higher or lower.
 - Then repeats until the number has been guessed. 
 """
 
 import random
 
-def GetInput():
+def ValidateInput():
     try:
         guess = int(input("Guess a number from 1 to 100!"))
         if guess > 100 or guess < 1:
@@ -22,9 +22,10 @@ def GetInput():
 #The main loop of the game.
 def GuessingGame(goal):
     guess = None
-    #Ensure the guess is valid. A returned value means its validated, see GetInput().
+    
+    #Ensure the guess is valid. If a value is returned (not None) it is validated, see GetInput().
     while not guess:
-        guess = GetInput()
+        guess = ValidateInput()
 
     #Check the ranges respective to the goal value. Recursively call the main loop.
     if guess < goal:
@@ -36,4 +37,5 @@ def GuessingGame(goal):
     
     return "You got my number!"
 
-print(GuessingGame(random.randint(1, 100)))
+goal = random.randint(1, 100)
+print(GuessingGame(goal))
